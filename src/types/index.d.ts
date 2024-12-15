@@ -1,4 +1,4 @@
-export type Language = 'python' | 'javascript'
+export type Language = 'python' | 'golang'
 
 export interface ExecuteResult {
   status: 'success' | 'error'

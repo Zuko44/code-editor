@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import AceEditor from '@/components/AceEditor.vue'
-import type { Language, ExecuteResult } from '@/types/index'
+import type { Language, ExecuteResult } from '../types/index'
 
 const language = ref<Language>('python')
 const code = ref<string>('')
@@ -21,7 +21,7 @@ const runCode = async (): Promise<void> => {
     })
 
     const result: ExecuteResult = await response.json()
-    output.value = result.status === 'success' ? result.output : `Error: ${result.error}`
+    output.value = result.status === 'success' ? result.output || '' : `Error: ${result.error}`
   } catch (err) {
     output.value = 'Error: Failed to execute code.'
   }

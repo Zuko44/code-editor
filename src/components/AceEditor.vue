@@ -22,11 +22,11 @@ const props = defineProps<Props>()
 const emit = defineEmits<Emit>()
 
 const editor = ref<HTMLDivElement | null>(null)
-let aceEditor: Ace.Editor | null = null
+let aceEditor: any = null
 
 onMounted(() => {
   ace.config.set('basePath', '/node_modules/ace-builds/src-noconflict/')
-  aceEditor = ace.edit(editor.value, {
+  aceEditor = ace.edit(editor.value!, {
     mode: `ace/mode/${props.language}`,
     theme: 'ace/theme/monokai',
     value: props.modelValue,
@@ -44,7 +44,7 @@ onBeforeUnmount(() => {
 watch(
   () => props.language,
   (newLanguage) => {
-    aceEditor.session.setMode(`ace/mode/${newLanguage}`)
+    if (aceEditor) aceEditor.session.setMode(`ace/mode/${newLanguage}`)
   },
 )
 </script>
